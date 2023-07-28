@@ -1,3 +1,6 @@
+let prevTransparency=null;
+let age = null;
+
 function debounce(func, wait) {
     let timeout;
     return function() {
@@ -49,33 +52,41 @@ function calculateColor(transparency) {
 function calculateTransparency() {
     // Get page age
     let ageElement = document.querySelector('div[data-test-id="page-last-modified"] span[id="content-header.by-line.last.updated.version.1"]') || document.querySelector('span > a[href*="/wiki/pages/diffpagesbyversion.action?pageId="]');
-    let age = 'no age';
+    age = 'no age';
     let transparency = 0; // Start with maximum transparency
 
     if (ageElement) {
         let dateStr = ageElement.textContent.trim();
         let date = new Date(dateStr);
         let now = new Date();
-        let diffMonths = Math.floor((now - date) / (1000 * 60 * 60 * 24 * 30)); // approximate months
-        if (diffMonths <= 12) {
+        //let diffMonths = Math.floor((now - date) / (1000 * 60 * 60 * 24 * 30)); // approximate months
+        // Calculate the difference in months
+        let years = now.getFullYear() - date.getFullYear();
+        let months = now.getMonth() - date.getMonth();
+        let diffMonths = years * 12 + months;
+        //Check for NaN because confluence sometimes returns something like "20 minutes ago"
+        if (isNaN(diffMonths) || diffMonths < 1) {
             transparency = diffMonths / 12 * 0.7; // Update the transparency to range from 100% to 30% over 6 months
             age = diffMonths.toString() + ' months';
         } else {
             transparency = 0.7; // Minimum transparency (50%)
-            age = '12+ months';
+            age = '12+ months' + diffMonths;
         }
     }
     return transparency;
 }
 
 function applyCanvas(){
+    let transparency = calculateTransparency();
+    if (transparency == prevTransparency) return;
+    prevTransparency = transparency;
     // Check for existing canvas
     let oldCanvas = document.getElementById('parchment');
     if (oldCanvas) {
         // Remove existing canvas
         document.body.removeChild(oldCanvas);
     }
-    let transparency = calculateTransparency();
+
     if (transparency==0) return;
 
     //The older, the browner
@@ -145,7 +156,7 @@ function applyCanvas(){
     let textOffsetX = canvas.width - 20;  // Small offset to not overlap with the edge
     let textOffsetY = 90;  // Small offset to not overlap with the top edge
     context.fillText('Brown-ness: ' + Math.round(transparency * 100) + '%', textOffsetX, textOffsetY);
-    //context.fillText('Color: ' + color, textOffsetX, textOffsetY+20);
+    context.fillText('Age: ' + age, textOffsetX, textOffsetY+20);
 
 }
 
