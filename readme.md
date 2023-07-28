@@ -6,7 +6,7 @@ This extension overlays a progressively less transparent "parchment" over Conflu
 - Overlay a "parchment" canvas that covers the entire body of a Confluence page.
 - The brownness of the parchment increases progressively the older the page is.  Anything less than a month old does not show the parchment at all.
 - The parchment uses an SVG filter for a stylized look and is also given a parchment CSS class.
-- The "brownness" of the parchment are displayed on the top-right corner of the canvas.
+- The "brownness" of the parchment is displayed on the top-right corner of the canvas.
 - Adapted css styling from https://codepen.io/AgnusDei/pen/NWPbOxL 
 
 ## Installation
