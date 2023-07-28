@@ -9,27 +9,6 @@ function debounce(func, wait) {
     };
 }
 
-function getPageAge() {
-    // Try to get the date from the first selector
-    let dateString = document.querySelector('div[data-test-id="page-last-modified"] span[id="content-header.by-line.last.updated.version.1"]');
-    if (!dateString) {
-        // If the first selector didn't work, try the second
-        dateString = document.querySelector('span > a[href*="/wiki/pages/diffpagesbyversion.action?pageId="]');
-    }
-    if (!dateString) {
-        // If neither selector worked, return "no age"
-        return 0;
-    }
-    // Parse the date string into a Date object
-    let pageDate = new Date(dateString.textContent);
-    // Get the current date
-    let currentDate = new Date();
-    // Calculate the difference in months
-    let months = currentDate.getMonth() - pageDate.getMonth() +
-        (12 * (currentDate.getFullYear() - pageDate.getFullYear()));
-    return months;
-}
-
 function calculateColor(transparency) {
     // Convert transparency to a percentage
     const transparencyPercent = transparency * 100;
@@ -65,7 +44,8 @@ function calculateTransparency() {
         let months = now.getMonth() - date.getMonth();
         let diffMonths = years * 12 + months;
         //Check for NaN because confluence sometimes returns something like "20 minutes ago"
-        if (isNaN(diffMonths) || diffMonths < 1) {
+        if (isNaN(diffMonths)) diffMonths=0;
+        if (diffMonths <= 12) {
             transparency = diffMonths / 12 * 0.7; // Update the transparency to range from 100% to 30% over 6 months
             age = diffMonths.toString() + ' months';
         } else {
