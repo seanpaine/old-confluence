@@ -10,12 +10,12 @@ This extension overlays a progressively less transparent "parchment" over Conflu
 
 ## Installation
 
-1. Clone the repository: `git clone https://github.com/sean.paine/code/old-confluence.git`
+1. Clone the repository: `git clone https://github.com/seanpaine/old-confluence.git`
 2. Navigate to `chrome://extensions/` in your Chrome browser.
 3. Enable "Developer mode" at the top-right.
 4. Click on "Load unpacked" and select the cloned repository folder.
 
-Please make sure to replace `https://github.com/sean.paine/code/old-confluence.git` with the actual URL of this repository.
+Please make sure to replace `https://github.com/seanpaine/old-confluence.git` with the actual URL of this repository.
 
 ## Contributing
 
