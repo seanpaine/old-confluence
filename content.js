@@ -38,7 +38,6 @@ function calculateTransparency() {
         let dateStr = ageElement.textContent.trim();
         let date = new Date(dateStr);
         let now = new Date();
-        //let diffMonths = Math.floor((now - date) / (1000 * 60 * 60 * 24 * 30)); // approximate months
         // Calculate the difference in months
         let years = now.getFullYear() - date.getFullYear();
         let months = now.getMonth() - date.getMonth();
@@ -49,7 +48,7 @@ function calculateTransparency() {
             transparency = diffMonths / 12 * 0.7; // Update the transparency to range from 100% to 30% over 6 months
             age = diffMonths.toString() + ' months';
         } else {
-            transparency = 0.7; // Minimum transparency (50%)
+            transparency = 0.7; // Maximum transparency (70%)
             age = '12+ months' + diffMonths;
         }
     }
@@ -58,6 +57,7 @@ function calculateTransparency() {
 
 function applyCanvas(){
     let transparency = calculateTransparency();
+    //Return if no UI changes needed
     if (transparency == prevTransparency) return;
     prevTransparency = transparency;
     // Check for existing canvas
