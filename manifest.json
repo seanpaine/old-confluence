@@ -1,0 +1,13 @@
+{
+    "manifest_version": 3,
+    "name": "Confluence Page Age",
+    "version": "1.0",
+    "permissions": ["activeTab"],
+    "action": {},
+    "content_scripts": [
+        {
+            "matches": ["*://*.atlassian.net/wiki/*"],
+            "js": ["content.js"]
+        }
+    ]
+}
