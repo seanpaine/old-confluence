@@ -78,12 +78,13 @@ function applyCanvas(){
         #parchment {
             position: absolute;
             display: flex;
-            top: 10px;
-            bottom: 30px;
+            margin-top: 30px; 
+            left:10px;
+            bottom: 10px;
             right: 30px;
             width: calc(100vw - 80px);
             height: calc(100vh - 80px);
-            z-index: 9999;
+            z-index: 1;
             pointer-events: none;
             box-shadow: 2px 3px 20px black, 0 0 125px ${color} inset;
             filter: url(#wavy2);
@@ -96,8 +97,8 @@ function applyCanvas(){
     `;
     document.head.appendChild(style);
 
-
     // Create the canvas and inject into the page
+
     let canvas = document.createElement('canvas');
     canvas.id = 'parchment';
     canvas.style.position = 'fixed';
@@ -105,7 +106,13 @@ function applyCanvas(){
     canvas.height = window.innerHeight;
     canvas.style.top = '5%';
     canvas.style.left = '5%';
-    document.body.appendChild(canvas);
+    let contentBody = document.querySelector('#content-body');
+    if (contentBody){
+        contentBody.prepend(canvas);
+    }
+    else {
+        document.body.appendChild(canvas);
+    }
     let context = canvas.getContext('2d');
 
     // Set the parchment transparency
