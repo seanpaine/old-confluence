@@ -14,9 +14,9 @@ function calculateColor(transparency) {
     const transparencyPercent = transparency * 100;
 
     // Color components
-    const red = 143;
-    const green = 89;
-    const blue = 34;
+    const red = 90;
+    const green = 45;
+    const blue = 15;
 
     // Calculate lighter color components based on transparency
     const lighterRed = Math.min(255, red + (255 - red) * (transparencyPercent / 100));
@@ -62,11 +62,11 @@ function applyCanvas(){
     prevTransparency = transparency;
     // Check for existing canvas - removed because it was causing an error 
     // and probably not necessary
-    //let oldCanvas = document.getElementById('parchment');
-    //if (oldCanvas) {
+    let oldCanvas = document.getElementById('parchment');
+    if (oldCanvas) {
         // Remove existing canvas
-        //oldCanvas.parentElement.removeChild(oldCanvas);
-    //}
+        oldCanvas.remove();
+    }
 
     if (transparency==0) return;
 
