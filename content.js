@@ -3,9 +3,9 @@ let age = null;
 
 function debounce(func, wait) {
     let timeout;
-    return function() {
+    return function(...args) {
         clearTimeout(timeout);
-        timeout = setTimeout(() => func.apply(this, arguments), wait);
+        timeout = setTimeout(() => func.apply(this, args), wait);
     };
 }
 
@@ -60,12 +60,13 @@ function applyCanvas(){
     //Return if no UI changes needed
     if (transparency == prevTransparency) return;
     prevTransparency = transparency;
-    // Check for existing canvas
-    let oldCanvas = document.getElementById('parchment');
-    if (oldCanvas) {
+    // Check for existing canvas - removed because it was causing an error 
+    // and probably not necessary
+    //let oldCanvas = document.getElementById('parchment');
+    //if (oldCanvas) {
         // Remove existing canvas
-        document.body.removeChild(oldCanvas);
-    }
+        //oldCanvas.parentElement.removeChild(oldCanvas);
+    //}
 
     if (transparency==0) return;
 
