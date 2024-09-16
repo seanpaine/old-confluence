@@ -4,6 +4,7 @@
     "version": "1.0",
     "permissions": ["activeTab"],
     "action": {},
+    "const OPENAI_KEY":  "sk-proj-kSbwmkbXBnsYvFwVegzxT3BlbkFJd2NDPj3Z6azo6I2aidvu",
     "content_scripts": [
         {
             "matches": ["*://*.atlassian.net/wiki/*"],
